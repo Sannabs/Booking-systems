@@ -33,7 +33,7 @@ app.use('/bookings', BookingRoutes)
 
 
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('home')
 })
 
 
