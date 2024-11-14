@@ -1,0 +1,42 @@
+<header class="nav-header">
+  <div class="logo-search">
+      <a href="/" class="logo"><i class="fas fa-home"></i></a>
+  </div>
+
+  <div class="bar2">
+      <i class="fa-solid fa-magnifying-glass"></i>
+  </div>
+
+  <div class="dashboard">
+      <li>
+          <a href="#" id="dashboard-link">Dashboard</a>
+          <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+          <ul class="dropdown-content" style="display: none;">
+              <li><a href="/upcoming"><i class="fa-solid fa-clock"></i> Upcoming Bookings</a></li>
+              <li><a href="/approved-bookings"><i class="fa-solid fa-check-circle"></i> Approved Bookings</a></li>
+              <li><a href="/history"><i class="fa-solid fa-history"></i> Booking History</a></li>
+              <li><a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+          </ul>
+      </li>
+  </div>
+
+  <ul class="navbar">
+      <li><a href="/" class="active"><i class="ri-home-smile-2-fill"></i> Home</a></li>
+      <li><a href="/available-bookings"><i class="ri-calendar-check-fill"></i>Available Bookings</a></li>
+      <li><a href="/book-appointment"><i class="ri-function-add-fill"></i>Book Appointment</a></li>
+      <li><a href="/my-bookings"><i class="ri-bookmark-fill"></i>My Bookings</a></li>
+      <li><a href="/services"><i class="ri-service-fill"></i>All Services</a></li>
+      <li><a href="/payment"><i class="ri-wallet-line"></i>Payment</a></li>
+    </ul>
+  <div class="main">
+          <a href="/login" title="Login" class="tooltip-link">
+              <i class="ri-login-box-line"></i>
+          </a>
+          <a href="/register" title="register" class="tooltip-link"><i class="fa-solid fa-user-plus"></i></a>
+          <a href="/logout" class="logout tooltip-link" title="Logout"><i class="ri-logout-box-line"></i></a>
+          <a href="#"><img src="/images/ousainou.jpg" alt="Profile" class="profile-icon"></a>
+      <i class="ri-menu-line" id="menu-icon"></i>
+  </div>
+</header>
+<script src="/javascripts/dashDrop.js"></script>
+<script src="/javascripts/navSearchVisibility.js"></script>
