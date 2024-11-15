@@ -3,9 +3,10 @@
 <section class="h-screen flex items-center justify-center">
     <div class="w-full max-w-md bg-white rounded-lg shadow dark:bg-gray-800">
         <div class="p-6 space-y-4 sm:p-8">
-            <h1 class="text-xl font-bold tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Login to your account
-            </h1>
+            <!-- Centered Image instead of h1 -->
+            <div class="flex justify-center">
+                <img src="https://codersclutch.com/wp-content/uploads/2024/05/cropped-coders-logo.png" alt="Login Image" class="max-w-xs">
+            </div>
             <form class="space-y-4" action="/login" method="POST" novalidate>
                 <div>
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
@@ -25,7 +26,7 @@
                     Login
                 </button>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Don’t have an account yet? <a href="/register" class="font-medium text-blue-700 hover:underline dark:text-blue-500">Sign up</a>
+                    Don’t have an account yet? <a href="/api/auth/register" class="font-medium text-blue-700 hover:underline dark:text-blue-500">Sign up</a>
                 </p>
             </form>
         </div>
