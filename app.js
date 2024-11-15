@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const express = require('express')
 const ejsMate = require('ejs-mate')
 const ejs = require('ejs')
+const cookieParser = require('cookie-parser');
 const Booking = require('./models/Booking')
 const app = express()
 const ExpressError = require('./utils/ExpressError');
@@ -27,8 +28,9 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'src')))
 app.use(express.static(path.join(__dirname, 'public')))
-
+app.use(cookieParser());
 app.use(express.json());
+
 
 
 // routes
