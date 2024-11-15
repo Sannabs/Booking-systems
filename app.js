@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config();
 const path = require('path')
 const mongoose = require('mongoose');
 const express = require('express')
@@ -5,9 +6,10 @@ const ejsMate = require('ejs-mate')
 const ejs = require('ejs')
 const Booking = require('./models/Booking')
 const app = express()
-const BookingRoutes = require('./routes/Booking');
 const ExpressError = require('./utils/ExpressError');
-
+const BookingRoutes = require('./routes/Booking');
+const authRoutes = require("./routes/authRoutes")
+const userRoutes = require("./routes/userRoute")
 
 
 
@@ -26,7 +28,13 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'src')))
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(express.json());
+
+
+// routes
 app.use('/bookings', BookingRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
 
 
 

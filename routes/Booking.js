@@ -8,7 +8,9 @@ const router = express.Router();
 
 router.route('/')
     .get(catchAsync(booking.index))
-    .post(catchAsync(booking.new))
+    .post(catchAsync(booking.addBooking))
+
+router.get('/book', booking.bookForm)
 
 
 router.route('/:id')

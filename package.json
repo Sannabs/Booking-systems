@@ -11,10 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
     "express": "^4.21.1",
     "flowbite": "^2.5.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
     "mongosh": "^2.3.3",
     "node": "^22.11.0",
