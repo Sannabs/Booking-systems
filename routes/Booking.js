@@ -11,7 +11,7 @@ router.route('/')
     .post(catchAsync(booking.addBooking))
 
 router.get('/book', booking.bookForm)
-
+router.get('/allUsers', booking.showUsers)
 
 router.route('/:id')
     .get(catchAsync(booking.details))
