@@ -9,13 +9,15 @@ const router = express.Router();
 
 router.route('/')
     .get(catchAsync(booking.index))
-    .get(catchAsync(booking.approved))
-    .get(catchAsync(booking.completed))
 
     .post(catchAsync(booking.addBooking))
 
 
 router.get(('/pending'),catchAsync(booking.pending))
+router.get(('/approved'), catchAsync(booking.approved))
+router.get(('/completed'), catchAsync(booking.completed))
+router.get(('/cancelled'), catchAsync(booking.cancelled))
+
 
 router.get('/book', booking.bookForm)
 router.get('/allUsers', isLoggedIn, booking.showUsers)
