@@ -8,7 +8,7 @@ const {isLoggedIn, isAdmin} = require('../middlewares/authMiddlewares')
 const router = express.Router();
 
 router.route('/')
-    
+    .get(catchAsync(booking.index))
     .get(catchAsync(booking.approved))
     .get(catchAsync(booking.completed))
 

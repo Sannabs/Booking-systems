@@ -21,7 +21,7 @@ const  BookingSchema = new mongoose.Schema ( {
     service: {
         type: String,
         required: true,
-        enum: ['Option 1', 'Option 2', 'Option 3']
+        enum: ['Digital Solutions', 'Option 2', 'Option 3']
     },
     description: {
         type: String,
