@@ -1,3 +1,132 @@
 <%- layout('layouts/boiler') %>
+    <section class="h-screen flex items-center justify-center">
+        <div class="w-full max-w-lg bg-white rounded-lg shadow-lg">
+            <div class="p-6 space-y-4 sm:p-8">
 
-<script src="/javascriptsform.js"></script>
+                <!-- Centered Progress Bar with Steps -->
+                <div class="flex justify-center mb-6">
+                    <div class="flex custom-space">
+                        <div class="text-center">
+                            <div class="flex items-center justify-center w-8 h-8 bg-indigo-500 text-white rounded-full">
+                                1</div>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="flex items-center justify-center w-8 h-8 bg-gray-300 text-gray-600 rounded-full">
+                                2</div>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="flex items-center justify-center w-8 h-8 bg-gray-300 text-gray-600 rounded-full">
+                                3</div>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="flex items-center justify-center w-8 h-8 bg-gray-300 text-gray-600 rounded-full">
+                                4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Step Form -->
+                <form id="multi-step-form" class="space-y-4" method="POST" action="/submit-booking">
+                    <!-- Step 1: Personal Information -->
+                    <div id="step-1" class="step-form">
+                        <h2 class="text-xl font-semibold mb-4">Step 1: Personal Information</h2>
+                        <div>
+                            <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
+                            <input type="text" id="fullname" name="fullname"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+                                placeholder="Your Full Name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            <input type="email" id="email" name="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+                                placeholder="example@example.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Company & Position -->
+                    <div id="step-2" class="step-form hidden">
+                        <h2 class="text-xl font-semibold mb-4">Step 2: Company Information</h2>
+                        <div>
+                            <label for="company" class="block mb-2 text-sm font-medium text-gray-900">Company</label>
+                            <input type="text" id="company" name="company"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+                                placeholder="Your Company Name" required>
+                        </div>
+                        <div>
+                            <label for="position" class="block mb-2 text-sm font-medium text-gray-900">Position</label>
+                            <input type="text" id="position" name="position"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+                                placeholder="Your Position" required>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Select Digital Service -->
+                    <div id="step-3" class="step-form hidden">
+                        <h2 class="text-xl font-semibold mb-4">Step 3: Required Service</h2>
+                        <div>
+                            <label for="service" class="block mb-2 text-sm font-medium text-gray-900">What service do you require?</label>
+                            <div id="service"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5">
+                                <div>
+                                    <input type="radio" id="digital-solutions" name="service" value="Digital Solutions"
+                                        required />
+                                    <label for="digital-solutions" class="ml-2">Digital Solutions</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="information-technology" name="service"
+                                        value="Information Technology" />
+                                    <label for="information-technology" class="ml-2">Information Technology</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="blockchain-engineering" name="service"
+                                        value="Blockchain & Engineering" />
+                                    <label for="blockchain-engineering" class="ml-2">Blockchain & Engineering</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+            </div>
+
+            <!-- Step 4: Appointment Details -->
+            <div id="step-4" class="step-form hidden">
+                <h2 class="text-xl font-semibold mb-4">Step 4: Appointment Details</h2>
+                <div>
+                    <label for="appointmentType" class="block mb-2 text-sm font-medium text-gray-900">Appointment
+                        Type</label>
+                    <div id="appointmentType"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5">
+                        <div>
+                            <input type="radio" id="virtual" name="appointmentType" value="Virtual" required />
+                            <label for="virtual" class="ml-2">Virtual</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="in-person" name="appointmentType" value="In-person" />
+                            <label for="in-person" class="ml-2">In-person</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                    <textarea id="description" name="description"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
+                        placeholder="Provide a brief description..." rows="4" required></textarea>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-6">
+                <button id="prev-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg" disabled>Previous</button>
+                <button id="next-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg">Next</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </section>
+    <script src="/javascripts/form.js"></script>
