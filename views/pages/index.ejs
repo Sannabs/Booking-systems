@@ -60,39 +60,40 @@
                     </a>
                 </li>
                 <% if(!currentUser) { %>
-                <li>
-                    <a href="/login"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="ri-login-box-line"></i>
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-                    </a>
-                </li>
-                <% } %>
+                    <li>
+                        <a href="/login"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i class="ri-login-box-line"></i>
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
+                        </a>
+                    </li>
+                    <% } %>
 
-                <% if(currentUser) { %>
-                <li>
-                    <a href="/logout"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="ri-login-box-line"></i>
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
-                    </a>
-                </li>
-                <% } %>
-                <% if(!currentUser) { %>
-                <li>
-                    <a href="/register"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="ri-user-add-line"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-                    </a>
-                </li>
-                <% } %>
+                        <% if(currentUser) { %>
+                            <li>
+                                <a href="/logout"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <i class="ri-login-box-line"></i>
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                                    </svg>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
+                                </a>
+                            </li>
+                            <% } %>
+                                <% if(!currentUser) { %>
+                                    <li>
+                                        <a href="/register"
+                                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                            <i class="ri-user-add-line"></i>
+                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+                                        </a>
+                                    </li>
+                                    <% } %>
             </ul>
         </div>
     </aside>
@@ -102,52 +103,65 @@
 
             <!-- Section: Pending and Approved Bookings -->
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-hourglass-line text-orange-500 pr-3 text-xl"></i> Pending Bookings
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-orange-500 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
-                        8
-                    </span>
-                </div>
+                <a href="/bookings/pending" class="block">
+                    <div
+                        class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
+                        <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
+                            <i class="ri-hourglass-line text-orange-500 pr-3 text-xl"></i> Pending Bookings
+                        </p>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-orange-500 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
+                            8
+                        </span>
+                    </div>
+                </a>
 
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-checkbox-circle-line text-green-600 pr-3 text-xl"></i> Approved Bookings
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
-                        15
-                    </span>
-                </div>
+                <a href="/bookings/approved" class="block">
+                    <div
+                        class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
+                        <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
+                            <i class="ri-checkbox-circle-line text-green-600 pr-3 text-xl"></i> Approved Bookings
+                        </p>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
+                            15
+                        </span>
+                    </div>
+                </a>
+
             </div>
 
             <!-- Section: Complete and Cancelled Meetings -->
             <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-checkbox-multiple-fill text-blue-600 pr-3 text-xl"></i> Complete Meeting
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                        20
-                    </span>
-                </div>
+                <a href="/bookings/completed" class="block">
+                    <div
+                        class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
+                        <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
+                            <i class="ri-checkbox-multiple-fill text-blue-600 pr-3 text-xl"></i> Complete Meeting
+                        </p>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                            20
+                        </span>
+                    </div>
+                </a>
 
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-close-circle-line text-red-700 pr-3 text-xl"></i> Cancelled Meeting
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-red-700 bg-red-100 rounded-full dark:bg-red-900 dark:text-red-300">
-                        20
-                    </span>
-                </div>
+                <a href="/bookings/cancelled" class="block">
+                    <div
+                        class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
+                        <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
+                            <i class="ri-close-circle-line text-red-700 pr-3 text-xl"></i> Cancelled Meeting
+                        </p>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-red-700 bg-red-100 rounded-full dark:bg-red-900 dark:text-red-300">
+                            20
+                        </span>
+                    </div>
+                </a>
             </div>
 
             <!-- Container with two columns -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <div class=" scale grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
 
                 <!-- Appointment Chart (left side) -->
                 <div class="flex items-center justify-center w-full h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">

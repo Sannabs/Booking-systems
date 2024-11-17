@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%- layout('layouts/boiler') %>
 
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
@@ -101,74 +100,87 @@
 
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+            
 
-            <!-- Section: Pending and Approved Bookings -->
-            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                <a href="/bookings/pending"
-                    class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-hourglass-line text-orange-500 pr-3 text-xl"></i> Pending Bookings
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-orange-500 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
-                        8
-                    </span>
-                </a>
-
-
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-checkbox-circle-line text-green-600 pr-3 text-xl"></i> Approved Bookings
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
-                        15
-                    </span>
-                </div>
-            </div>
-
-            <!-- Section: Complete and Cancelled Meetings -->
-            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-checkbox-multiple-fill text-blue-600 pr-3 text-xl"></i> Complete Meeting
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                        20
-                    </span>
-                </div>
-
-                <div class="flex flex-col items-center justify-center px-4 py-6 rounded bg-gray-50 dark:bg-gray-800">
-                    <p class="text-md font-semibold text-gray-600 dark:text-black flex items-center gap-2">
-                        <i class="ri-close-circle-line text-red-700 pr-3 text-xl"></i> Cancelled Meeting
-                    </p>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-red-700 bg-red-100 rounded-full dark:bg-red-900 dark:text-red-300">
-                        20
-                    </span>
-                </div>
-            </div>
-
-            <!-- Container with two columns -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-
-                <!-- Appointment Chart (left side) -->
-                <div class="flex items-center justify-center w-full h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                    <canvas id="appointmentChart" class="w-full h-full"></canvas>
-                </div>
-
-                <!-- Line Chart (right side) -->
-                <div class="flex items-center justify-center w-full h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                    <canvas id="bookingLineGraph" class="w-full h-full"></canvas>
-                </div>
-
-            </div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Color
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Edit</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Apple MacBook Pro 17"
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                    Laptop
+                </td>
+                <td class="px-6 py-4">
+                    $2999
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Microsoft Surface Pro
+                </th>
+                <td class="px-6 py-4">
+                    White
+                </td>
+                <td class="px-6 py-4">
+                    Laptop PC
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Magic Mouse 2
+                </th>
+                <td class="px-6 py-4">
+                    Black
+                </td>
+                <td class="px-6 py-4">
+                    Accessories
+                </td>
+                <td class="px-6 py-4">
+                    $99
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
         </div>
     </div>
 
-    <script src="/javascripts/numAppointment.js"></script>
-    <script src="/javascripts/appointRise.js"></script>
-=======
->>>>>>> c7314b9ee5781fc6d4e192619e36c186c0e649a1
+    
+
