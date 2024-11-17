@@ -4,6 +4,12 @@ const User = require('../models/userModel')
 
 
 
+module.exports.index = async (req, res) => {
+    const bookings = await Booking.find({})
+    res.render('pages/index', { bookings })
+}
+
+
 module.exports.pending = async (req, res) => {
     const bookings = await Booking.find({})
     res.render('pages/pending', { bookings })
@@ -14,9 +20,9 @@ module.exports.approved = async (req, res) => {
     res.render('pages/approved', { bookings })
 }
 
-module.exports.completed = async (req, res) => {
+module.exports.pending = async (req, res) => {
     const bookings = await Booking.find({})
-    res.render('pages/completed', { bookings })
+    res.render('pages/pending', { bookings })
 }
 
 
