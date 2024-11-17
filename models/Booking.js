@@ -31,6 +31,10 @@ const  BookingSchema = new mongoose.Schema ( {
         type: String,
         required: true,
         enum: ['Option 1', 'Option 2']
+    },
+    approved: {
+        type: Boolean,
+        default: false
     }
 })
 
