@@ -49,9 +49,32 @@ nextBtn.addEventListener('click', () => {
   if (currentStep < steps.length) {
     currentStep++;
     updateForm();
-  } else {
-    alert('Form submitted!');
-  }
+  } 
 });
 
 updateForm();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const serviceRadios = document.querySelectorAll('input[name="service"]');
+  const digitalServicesSection = document.getElementById("digitalServicesSection");
+  const itServicesSection = document.getElementById("itServicesSection");
+  const engineeringServicesSection = document.getElementById("engineeringServicesSection");
+
+  serviceRadios.forEach(radio => {
+      radio.addEventListener("change", function () {
+          // Hide all sections first
+          digitalServicesSection.classList.add("hidden");
+          itServicesSection.classList.add("hidden");
+          engineeringServicesSection.classList.add("hidden");
+
+          // Show relevant section based on selected service
+          if (this.value === "Digital Solutions") {
+              digitalServicesSection.classList.remove("hidden");
+          } else if (this.value === "Information Technology") {
+              itServicesSection.classList.remove("hidden");
+          } else if (this.value === "Blockchain & Engineering") {
+              engineeringServicesSection.classList.remove("hidden");
+          }
+      });
+  });
+});

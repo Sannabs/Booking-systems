@@ -25,6 +25,11 @@
                                 class="flex items-center justify-center w-8 h-8 bg-gray-300 text-gray-600 rounded-full">
                                 4</div>
                         </div>
+                        <div class="text-center">
+                            <div
+                                class="flex items-center justify-center w-8 h-8 bg-gray-300 text-gray-600 rounded-full">
+                                5</div>
+                        </div>
                     </div>
                 </div>
 
@@ -32,7 +37,7 @@
                 <form id="multi-step-form" class="space-y-4" method="POST" action="/submit-booking">
                     <!-- Step 1: Personal Information -->
                     <div id="step-1" class="step-form">
-                        <h2 class="text-xl font-semibold mb-4">Step 1: Personal Information</h2>
+                        <h2 class="text-xl font-semibold mb-4">Step 1: Personal Information:</h2>
                         <div>
                             <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
                             <input type="text" id="fullname" name="fullname"
@@ -49,7 +54,7 @@
 
                     <!-- Step 2: Company & Position -->
                     <div id="step-2" class="step-form hidden">
-                        <h2 class="text-xl font-semibold mb-4">Step 2: Company Information</h2>
+                        <h2 class="text-xl font-semibold mb-4">Step 2: Company Information:</h2>
                         <div>
                             <label for="company" class="block mb-2 text-sm font-medium text-gray-900">Company</label>
                             <input type="text" id="company" name="company"
@@ -66,9 +71,10 @@
 
                     <!-- Step 3: Select Digital Service -->
                     <div id="step-3" class="step-form hidden">
-                        <h2 class="text-xl font-semibold mb-4">Step 3: Required Service</h2>
+                        <h2 class="text-xl font-semibold mb-4">Step 3: Required Service:</h2>
                         <div>
-                            <label for="service" class="block mb-2 text-sm font-medium text-gray-900">What service do you require?</label>
+                            <label for="service" class="block mb-2 text-sm font-medium text-gray-900">What service do
+                                you require?</label>
                             <div id="service"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5">
                                 <div>
@@ -93,9 +99,107 @@
 
             </div>
 
-            <!-- Step 4: Appointment Details -->
-            <div id="step-4" class="step-form hidden">
-                <h2 class="text-xl font-semibold mb-4">Step 4: Appointment Details</h2>
+            <!-- Step-4: specific services -->
+            <div id="step-4" class="step-form hidden px-6">
+                <!-- Digital Services Options (appears if "Digital Solutions" is selected) -->
+                <div id="digitalServicesSection" class="hidden">
+                    <h3 class="text-xl font-semibold mb-4">Choose Digital Service:</h3>
+                    <div class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5">
+                        <div>
+                            <input type="radio" id="webDevelopment" name="digitalService" value="webDevelopment" />
+                            <label for="webDevelopment" class="ml-2">Web Development</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="eCommerce" name="digitalService" value="eCommerce" />
+                            <label for="eCommerce" class="ml-2">E-commerce Solutions</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="mobileApplications" name="digitalService"
+                                value="mobileApplications" />
+                            <label for="mobileApplications" class="ml-2">Mobile Applications</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="digitalMarketing" name="digitalService" value="digitalMarketing" />
+                            <label for="digitalMarketing" class="ml-2">Digital Marketing and Branding</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="contentManagement" name="digitalService"
+                                value="contentManagement" />
+                            <label for="contentManagement" class="ml-2">Content Management</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="selfServiceSystems" name="digitalService"
+                                value="selfServiceSystems" />
+                            <label for="selfServiceSystems" class="ml-2">Self-Service Systems</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IT Services Options (appears if "Information Technology" is selected) -->
+                <div id="itServicesSection" class="hidden">
+                    <h3 class="text-xl font-semibold mb-4">Choose IT Service:</h3>
+                    <div class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5">
+                        <div>
+                            <input type="radio" id="aiBigData" name="itService" value="aiBigData" />
+                            <label for="aiBigData" class="ml-2">AI and Big Data Analytics</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="customSoftware" name="itService" value="customSoftware" />
+                            <label for="customSoftware" class="ml-2">Custom Software Solutions</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="cloudCybersecurity" name="itService" value="cloudCybersecurity" />
+                            <label for="cloudCybersecurity" class="ml-2">Cloud Computing & Cybersecurity
+                                Solutions</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="businessAutomation" name="itService" value="businessAutomation" />
+                            <label for="businessAutomation" class="ml-2">Business Process Automation</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="databaseNetwork" name="itService" value="databaseNetwork" />
+                            <label for="databaseNetwork" class="ml-2">Database & Network Management</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="digitalForensics" name="itService" value="digitalForensics" />
+                            <label for="digitalForensics" class="ml-2">Digital and Forensics Solutions</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engineering Services Options (appears if "Blockchain & Engineering" is selected) -->
+                <div id="engineeringServicesSection" class="hidden">
+                    <h3 class="text-xl font-semibold mb-4">Choose Engineering Service:</h3>
+                    <div class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5">
+                        <div>
+                            <input type="radio" id="bitcoinMining" name="engineeringService" value="bitcoinMining" />
+                            <label for="bitcoinMining" class="ml-2">Bitcoin Mining Rigs</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="roboticsCommunication" name="engineeringService"
+                                value="roboticsCommunication" />
+                            <label for="roboticsCommunication" class="ml-2">Robotics & Communication</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="biomedicalEngineering" name="engineeringService"
+                                value="biomedicalEngineering" />
+                            <label for="biomedicalEngineering" class="ml-2">Biomedical Engineering</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="agroTechnologies" name="engineeringService"
+                                value="agroTechnologies" />
+                            <label for="agroTechnologies" class="ml-2">Agro Technologies</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Step 5: Appointment Details -->
+            <div id="step-5" class="step-form hidden px-6"> <!-- Added px-6 for padding -->
+                <h2 class="text-xl font-semibold mb-4">Step 4: Appointment Details:</h2>
                 <div>
                     <label for="appointmentType" class="block mb-2 text-sm font-medium text-gray-900">Appointment
                         Type</label>
@@ -120,11 +224,14 @@
                 </div>
             </div>
 
+
             <!-- Navigation Buttons -->
-            <div class="flex justify-between mt-6">
-                <button id="prev-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg" disabled>Previous</button>
-                <button id="next-btn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg">Next</button>
+            <div class="flex justify-between mt-6 px-6"> <!-- Added px-6 for padding -->
+                <button id="prev-btn" class="bg-indigo-600 text-white px-5 py-2 mb-3 rounded-lg"
+                    disabled>Previous</button>
+                <button id="next-btn" class="bg-indigo-600 text-white px-5 py-2 mb-3 rounded-lg">Next</button>
             </div>
+
             </form>
         </div>
         </div>
