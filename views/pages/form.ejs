@@ -34,19 +34,19 @@
                 </div>
 
                 <!-- Multi-Step Form -->
-                <form id="multi-step-form" class="space-y-4" action="/bookings" method="POST"">
+                <form id="multi-step-form" class="space-y-4" action="/bookings" method="POST">
                     <!-- Step 1: Personal Information -->
                     <div id="step-1" class="step-form">
                         <h2 class="text-xl font-semibold mb-4">Step 1: Personal Information:</h2>
                         <div>
                             <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
-                            <input type="text" id="fullname" name="fullname"
+                            <input type="text" id="fullname" name="booking[fullname]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
                                 placeholder="Your Full Name" required>
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                            <input type="email" id="email" name="email"
+                            <input type="email" id="email" name="booking[email]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
                                 placeholder="example@example.com" required>
                         </div>
@@ -57,13 +57,13 @@
                         <h2 class="text-xl font-semibold mb-4">Step 2: Company Information:</h2>
                         <div>
                             <label for="company" class="block mb-2 text-sm font-medium text-gray-900">Company</label>
-                            <input type="text" id="company" name="company"
+                            <input type="text" id="company" name="booking[company]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
                                 placeholder="Your Company Name" required>
                         </div>
                         <div>
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900">Position</label>
-                            <input type="text" id="position" name="position"
+                            <input type="text" id="position" name="booking[position]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5"
                                 placeholder="Your Position" required>
                         </div>
