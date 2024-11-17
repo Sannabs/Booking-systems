@@ -30,6 +30,16 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'admin') {
+      return next();
+    }
+    req.flash('error', 'You do not have permission to perform this action.');
+    res.redirect('/dashboard');
+  }
+  
+
+
 
 // // REVIEW SERVER SIDE VALIDATOIN WITH JOI
 // module.exports.validateReview = (req, res, next) => {
