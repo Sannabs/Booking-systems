@@ -28,16 +28,16 @@ module.exports.pending = async (req, res) => {
 
 
 module.exports.addBooking = async (req, res) => {
-    const booking = new Booking(req.body.booking)
+    const booking = new Booking(req.body)
     await booking.save();
     req.flash('success', 'Booked Successfully!')
-    res.redirect('success')
+    res.render('success')
 }
 
 module.exports.approveBooking = async (req, res) => {
     const {id} = req.body
     const booking = await Booking.findOneAndUpdate(id)
-    req.flash('success', 'Booked Successfully!')
+    req.flash('pagesuccess', 'Booked Successfully!')
 }
 
 module.exports.bookForm = (req, res) => {

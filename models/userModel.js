@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         enum: ["admin", "secretary", "generalManager", "headofMarket"],
         default: "user"
-    },    
+    },
 },
-{
-    timestamps: true,
-});
+    {
+        timestamps: true,
+    });
 
 userSchema.plugin(passportLocalMongoose);
 
