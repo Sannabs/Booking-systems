@@ -1,1 +1,238 @@
 <%- layout('layouts/boiler') %>
+
+    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+        type="button"
+        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" fill-rule="evenodd"
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+            </path>
+        </svg>
+    </button>
+
+    <aside id="logo-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        aria-label="Sidebar">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <a href="/" class="flex items-center ps-0.8 mb-5">
+                <img src="https://codersclutch.com/wp-content/uploads/2024/05/cropped-coders-logo.png"
+                    class="h-14 me-3 sm:h-16" alt="Flowbite Logo" />
+            </a>
+
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a href="/bookings"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-dashboard-line"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-line-chart-line"></i>
+                        <span class="ms-3">Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-settings-5-line"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-notification-3-line"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Notifications</span>
+                        <span
+                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bookings/allUsers"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-group-line"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-headphone-line"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Virtual Meeting</span>
+                    </a>
+                </li>
+                <% if(!currentUser) { %>
+                    <li>
+                        <a href="/login"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i class="ri-login-box-line"></i>
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
+                        </a>
+                    </li>
+                    <% } %>
+
+                        <% if(currentUser) { %>
+                            <li>
+                                <a href="/logout"
+                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <i class="ri-login-box-line"></i>
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                                    </svg>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
+                                </a>
+                            </li>
+                            <% } %>
+                                <% if(!currentUser) { %>
+                                    <li>
+                                        <a href="/register"
+                                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                            <i class="ri-user-add-line"></i>
+                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+                                        </a>
+                                    </li>
+                                    <% } %>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="p-4 sm:ml-64">
+        <div
+            class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 flex justify-center items-center min-h-screen">
+            <!-- Centered Inner Container -->
+            <div class="max-w-4xl w-full p-6 bg-white shadow rounded-lg">
+                <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Booking Details</h1>
+
+                <!-- Grid Container for Booking Details -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Full Name -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-blue-600 text-2xl">
+                            <!-- name icon -->
+                            <i class="ri-user-6-line"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Full Name</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">John Doe</p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-green-600 text-2xl">
+                            <!-- email icon -->
+                            <i class="ri-mail-line"></i>
+                        </div>
+
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Email</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">johndoe@example.com</p>
+                        </div>
+                    </div>
+
+                    <!-- Company -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-purple-600 text-2xl">
+                            <!-- company icon -->
+                            <i class="ri-building-2-line"></i>
+                        </div>
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Company</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">Tech Corp</p>
+                        </div>
+                    </div>
+
+                    <!-- Position -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-gray-700 text-2xl">
+                            <!-- position icon -->
+                            <i class="ri-briefcase-line"></i>
+                        </div>
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Position</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">Software Engineer</p>
+                        </div>
+                    </div>
+
+                    <!-- Service -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-orange-500 text-2xl">
+                            <!-- Service icon -->
+                            <i class="ri-service-line"></i>
+                        </div>
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Service</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">Information Technology</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-red-700 text-2xl">
+                            <!-- Service icon -->
+                            <i class="ri-focus-line"></i>
+                        </div>
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">IT Services</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">Cybersecurity</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Appointment Type -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 text-green-400 text-2xl">
+                            <!-- Appointment icon -->
+                            <i class="ri-headphone-line"></i>
+                        </div>
+
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Appointment Type</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">Virtual</p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="flex items-start gap-4 lg:col-span-2">
+                        <div class="flex-shrink-0 text-teal-600 text-2xl">
+                            <!-- Description icon -->
+                            <i class="ri-pencil-line"></i>
+                        </div>
+
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500">Description</p>
+                            <p class="text-lg font-medium text-gray-900 break-words">This is a sample description of the
+                                booking details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 flex justify-between">
+                    <!-- Unapprove Button -->
+                    <button type="button"
+                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Unapprove</button>
+
+                    <!-- Approve Button -->
+                    <button type="button"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Approve</button>
+                </div>
+
+            </div>
+        </div>
+    </div>

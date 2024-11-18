@@ -132,26 +132,27 @@
                     <% for (let booking of bookings) {%>
                     <tbody>
                         <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <%= booking.company %>
-                            </th>
-                            <td class="px-6 py-4">
-                                <%= booking.service  %>
-                            </td>
-                            <td class="px-6 py-4">
-                                <%= booking.appointmentType %>
-                            </td>
-                            <td class="px-6 py-4">
-                                <%= booking.fullname  %>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                    </tbody>
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer"
+                        onclick="window.location.href='/bookings/pending/<%= booking._id %>'">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <%= booking.company %>
+                        </th>
+                        <td class="px-6 py-4">
+                            <%= booking.service %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= booking.appointmentType %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= booking.fullname %>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="#"
+                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        </td>
+                    </tr>
+                                        </tbody>
                     <% } %>
                 </table>
             </div>
