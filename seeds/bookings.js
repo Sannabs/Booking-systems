@@ -19,7 +19,6 @@ const seedBookings = async () => {
                 digitalService: 'webDevelopment',
                 appointmentType: 'Virtual',
                 description: 'Looking to discuss a new website for the company.',
-                approved: false
             },
             {
                 fullname: 'Jane Doe',
@@ -30,7 +29,6 @@ const seedBookings = async () => {
                 itService: 'customSoftware',
                 appointmentType: 'In-person',
                 description: 'Discussing custom software for managing internal workflows.',
-                approved: true
             },
             {
                 fullname: 'John Smith',
@@ -41,7 +39,6 @@ const seedBookings = async () => {
                 itService: 'aiBigData',
                 appointmentType: 'Virtual',
                 description: 'Analyzing the potential for AI in our data analytics process.',
-                approved: false
             },
             {
                 fullname: 'Alice Johnson',
@@ -52,7 +49,6 @@ const seedBookings = async () => {
                 engineeringService: 'bitcoinMining',
                 appointmentType: 'In-person',
                 description: 'Meeting to explore blockchain applications for biotechnology.',
-                approved: true
             },
             {
                 fullname: 'Bob Brown',
@@ -63,7 +59,6 @@ const seedBookings = async () => {
                 itService: 'cloudCybersecurity',
                 appointmentType: 'Virtual',
                 description: 'Discussing the integration of cybersecurity into cloud systems.',
-                approved: false
             },
             {
                 fullname: 'Clara White',
@@ -74,7 +69,6 @@ const seedBookings = async () => {
                 engineeringService: 'roboticsCommunication',
                 appointmentType: 'In-person',
                 description: 'Exploring the use of robotics in environmental conservation.',
-                approved: true
             },
             {
                 fullname: 'David Wilson',
@@ -85,7 +79,6 @@ const seedBookings = async () => {
                 itService: 'businessAutomation',
                 appointmentType: 'Virtual',
                 description: 'Looking for automated solutions for business processes.',
-                approved: false
             },
             {
                 fullname: 'Eva Turner',
@@ -96,7 +89,6 @@ const seedBookings = async () => {
                 digitalService: 'eCommerce',
                 appointmentType: 'In-person',
                 description: 'Consultation regarding an e-commerce platform.',
-                approved: true
             },
             {
                 fullname: 'George Green',
@@ -107,7 +99,6 @@ const seedBookings = async () => {
                 engineeringService: 'biomedicalEngineering',
                 appointmentType: 'Virtual',
                 description: 'Exploring blockchain applications in healthcare and biomedical engineering.',
-                approved: false
             },
             {
                 fullname: 'Hannah Lee',
@@ -118,7 +109,6 @@ const seedBookings = async () => {
                 itService: 'digitalForensics',
                 appointmentType: 'In-person',
                 description: 'Meeting to discuss digital forensics and cybersecurity.',
-                approved: true
             }
         ];
 

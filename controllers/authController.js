@@ -6,7 +6,7 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res) => {
     try {
-        const { email, username, password, role = 'admin' } = req.body; // default role if not provided
+        const { email, username, password, role="user"} = req.body; // default role if not provided
         const user = new User({ email, username, role });
         const registeredUser = await User.register(user, password)
         req.login(registeredUser, err => {

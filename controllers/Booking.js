@@ -39,10 +39,17 @@ module.exports.addBooking = async (req, res) => {
     res.render('success')
 }
 
+module.exports.details = async (req, res) => {
+    const { id } = req.params
+    const booking = await Booking.findById(id)
+    res.render('pages/details', { booking })
+}
+
 module.exports.approveBooking = async (req, res) => {
-    const {id} = req.body
-    const booking = await Booking.findOneAndUpdate(id)
-    req.flash('pagesuccess', 'Booked Successfully!')
+    const { id } = req.params
+    const booking = await Booking.findByIdAndUpdate(id, {approved: true}, {new: true})
+    req.flash('success', 'Booking approved!')
+    res.redirect('/pending')
 }
 
 module.exports.bookForm = (req, res) => {
@@ -51,6 +58,6 @@ module.exports.bookForm = (req, res) => {
 
 module.exports.showUsers = async (req, res) => {
     const users = await User.find({})
-    res.render('pages/showUsers', { users })    
+    res.render('pages/showUsers', { users })
 }
 
