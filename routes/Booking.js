@@ -23,7 +23,8 @@ router.get(('/cancelled'), catchAsync(booking.cancelled))
 router.get('/book', booking.bookForm)
 router.get('/allUsers', booking.showUsers)
 
-router.route('/:id')
+
+router.route('/pending/:id')
     .get(catchAsync(booking.details))
     .put(isLoggedIn, catchAsync(booking.approveBooking))
 
