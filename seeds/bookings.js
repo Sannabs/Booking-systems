@@ -109,6 +109,7 @@ const seedBookings = async () => {
                 itService: 'digitalForensics',
                 appointmentType: 'In-person',
                 description: 'Meeting to discuss digital forensics and cybersecurity.',
+                approved: true
             }
         ];
 

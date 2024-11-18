@@ -6,17 +6,20 @@ const User = require('../models/userModel')
 
 module.exports.index = async (req, res) => {
     const bookings = await Booking.find({})
-    res.render('pages/index', { bookings })
+    const totalPending = await Booking.countDocuments({approved:false});
+    const totalApproved = await Booking.countDocuments({approved:true});
+
+    res.render('pages/index', { bookings, totalApproved, totalPending })
 }
 
 
 module.exports.pending = async (req, res) => {
     const bookings = await Booking.find({})
-    res.render('pages/pending', { bookings })
+    res.render('pages/pending', { bookings})
 }
 
 module.exports.approved = async (req, res) => {
-    const bookings = await Booking.find({})
+    const bookings = await Booking.find({approved: true})
     res.render('pages/approved', { bookings })
 }
 
@@ -51,6 +54,14 @@ module.exports.approveBooking = async (req, res) => {
     req.flash('success', 'Booking approved!')
     res.redirect('/pending')
 }
+
+module.exports.unApprovedBooking = async (req, res) => {
+    const { id } = req.params
+    const booking = await Booking.findByIdAndUpdate(id, {unApproved: true}, {new: true})
+    req.flash('success', 'Booking unapproved!')
+    res.redirect('/pending')
+}
+
 
 module.exports.bookForm = (req, res) => {
     res.render('pages/form')

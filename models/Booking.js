@@ -78,6 +78,10 @@ const BookingSchema = new mongoose.Schema({
     approved: {
         type: Boolean,
         default: false
+    },
+    unApproved: {
+        type: Boolean,
+        default: false
     }
 },
     {
