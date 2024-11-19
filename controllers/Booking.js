@@ -6,8 +6,8 @@ const User = require('../models/userModel')
 
 module.exports.index = async (req, res) => {
     const bookings = await Booking.find({})
-    const totalPending = await Booking.countDocuments({approved:false});
-    const totalApproved = await Booking.countDocuments({approved:true});
+    const totalPending = await Booking.countDocuments({approved:false, unApproved:false});
+    const totalApproved = await Booking.countDocuments({approved:true, unApproved:false});
 
     res.render('pages/index', { bookings, totalApproved, totalPending })
 }
@@ -24,7 +24,7 @@ module.exports.completed = async (req, res) => {
     res.render('pages/completed', { bookings })
 }
 
-module.exports.allBookings = async (req, res) => {
+module.exports.allBooking = async (req, res) => {
     const bookings = await Booking.find({})
     res.render('pages/allBookings', { bookings })
 }
