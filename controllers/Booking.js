@@ -8,8 +8,8 @@ module.exports.index = async (req, res) => {
     const bookings = await Booking.find({})
     const totalPending = await Booking.countDocuments({approved:false, unApproved:false});
     const totalApproved = await Booking.countDocuments({approved:true, unApproved:false});
-
-    res.render('pages/index', { bookings, totalApproved, totalPending })
+    const totalbookings = await Booking.countDocuments();
+    res.render('pages/index', { bookings, totalApproved, totalPending, totalbookings })
 }
 
 module.exports.analytics = async(req, res) => {
