@@ -14,7 +14,7 @@ router.route('/')
 
 
 
-router.get(('/pending'),catchAsync(booking.pending))
+router.get(('/pending'),catchAsync(booking.getPendingBookings))
 router.get(('/approved'), catchAsync(booking.approved))
 router.get(('/completed'), catchAsync(booking.completed))
 router.get(('/cancelled'), catchAsync(booking.cancelled))
@@ -25,8 +25,12 @@ router.get('/allUsers', booking.showUsers)
 
 router.route('/pending/:id')
     .get(catchAsync(booking.details))
-    .put(isLoggedIn, catchAsync(booking.approveBooking))
-    .put(isLoggedIn, catchAsync(booking.unApprovedBooking))
+
+
+router.route('/pending/:id/approve')
+    .post(isLoggedIn, catchAsync(booking.approveBooking));
+router.route('/pending/:id/unapprove')
+    .post(isLoggedIn, catchAsync(booking.unApprovedBooking));
 
 
 module.exports = router;

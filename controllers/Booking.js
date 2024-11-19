@@ -13,13 +13,9 @@ module.exports.index = async (req, res) => {
 }
 
 
-module.exports.pending = async (req, res) => {
-    const bookings = await Booking.find({})
-    res.render('pages/pending', { bookings})
-}
 
 module.exports.approved = async (req, res) => {
-    const bookings = await Booking.find({approved: true})
+    const bookings = await Booking.find({approved: true, unApproved: false})
     res.render('pages/approved', { bookings })
 }
 
@@ -48,19 +44,30 @@ module.exports.details = async (req, res) => {
     res.render('pages/details', { booking })
 }
 
+
 module.exports.approveBooking = async (req, res) => {
-    const { id } = req.params
-    const booking = await Booking.findByIdAndUpdate(id, {approved: true}, {new: true})
-    req.flash('success', 'Booking approved!')
-    res.redirect('/pending')
-}
+    const { id } = req.params;
+    await Booking.findByIdAndUpdate(id, { approved: true, unApproved: false }, { new: true });
+    req.flash('success', 'Booking approved!');
+    res.redirect('/bookings/pending'); 
+};
 
 module.exports.unApprovedBooking = async (req, res) => {
-    const { id } = req.params
-    const booking = await Booking.findByIdAndUpdate(id, {unApproved: true}, {new: true})
-    req.flash('success', 'Booking unapproved!')
-    res.redirect('/pending')
-}
+    const { id } = req.params;
+    await Booking.findByIdAndUpdate(id, { unApproved: true, approved: false }, { new: true });
+    req.flash('success', 'Booking unapproved!');
+    res.redirect('/bookings/pending'); 
+};
+
+module.exports.getPendingBookings = async (req, res) => {
+    const pendingBookings = await Booking.find({
+        approved: false,
+        unApproved: false,
+    });
+    res.render('pages/pending', { pendingBookings });
+};
+
+
 
 
 module.exports.bookForm = (req, res) => {
