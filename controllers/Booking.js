@@ -12,7 +12,9 @@ module.exports.index = async (req, res) => {
     res.render('pages/index', { bookings, totalApproved, totalPending })
 }
 
-
+module.exports.analytics = async(req, res) => {
+    res.render('pages/analytics')
+}
 
 module.exports.approved = async (req, res) => {
     const bookings = await Booking.find({approved: true, unApproved: false})
@@ -24,7 +26,7 @@ module.exports.completed = async (req, res) => {
     res.render('pages/completed', { bookings })
 }
 
-module.exports.allBooking = async (req, res) => {
+module.exports.allBookings = async (req, res) => {
     const bookings = await Booking.find({})
     res.render('pages/allBookings', { bookings })
 }
