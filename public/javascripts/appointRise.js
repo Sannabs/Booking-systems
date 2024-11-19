@@ -4,7 +4,7 @@ var bookingLineGraph = new Chart(ctx, {
     data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Example: Months of the year
         datasets: [{
-            label: 'Bookings Over Time',
+            label: 'Rise and Fall in Booking',
             data: [15, 25, 30, 20, 40, 35, 50, 45, 60, 55, 65, 70], // Example data: Number of bookings per month
             fill: false,
             borderColor: 'rgba(75, 192, 192, 1)', // Line color

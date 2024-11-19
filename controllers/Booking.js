@@ -28,9 +28,9 @@ module.exports.completed = async (req, res) => {
     res.render('pages/completed', { bookings })
 }
 
-module.exports.cancelled = async (req, res) => {
+module.exports.allBookings = async (req, res) => {
     const bookings = await Booking.find({})
-    res.render('pages/cancelled', { bookings })
+    res.render('pages/allBookings', { bookings })
 }
 
 

@@ -17,7 +17,7 @@ router.route('/')
 router.get(('/pending'),catchAsync(booking.pending))
 router.get(('/approved'), catchAsync(booking.approved))
 router.get(('/completed'), catchAsync(booking.completed))
-router.get(('/cancelled'), catchAsync(booking.cancelled))
+router.get(('/allBookings'), catchAsync(booking.allBookings))
 
 router.get('/book', booking.bookForm)
 router.get('/allUsers', booking.showUsers)
