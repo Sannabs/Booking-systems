@@ -81,3 +81,27 @@ module.exports.showUsers = async (req, res) => {
     res.render('pages/showUsers', { users })
 }
 
+module.exports.getBookingTrends = async (req, res) => {
+    try {
+        const { period } = req.query; // 'daily', 'weekly', 'monthly', or 'seasonal'
+
+        const groupByFormat = {
+            daily: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+            weekly: { $isoWeek: "$createdAt" },
+            monthly: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
+            seasonal: { $dateToString: { format: "%m", date: "$createdAt" } }, // Group by month for seasonal
+        };
+
+        const groupKey = groupByFormat[period] || groupByFormat.daily;
+
+        const trends = await Booking.aggregate([
+            { $group: { _id: groupKey, totalBookings: { $sum: 1 } } },
+            { $sort: { _id: 1 } },
+        ]);
+
+        res.json(trends);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to fetch booking trends" });
+    }
+};
