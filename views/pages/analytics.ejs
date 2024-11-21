@@ -37,15 +37,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="ri-notification-3-line"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Notifications</span>
-                        <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-                    </a>
-                </li>
-                <li>
                     <a href="/bookings/allUsers"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <i class="ri-group-line"></i>
@@ -98,21 +89,115 @@
         </div>
     </aside>
 
-    <div class="p-4 sm:ml-64">
+    <div id="first" class="p-4 sm:ml-64">
+
+        <div class="items-center justify-center hidden w-full md:flex md:w-auto md:order-1 sticky pt-4 top-0 bg-white z-10"
+            id="navbar-sticky">
+            <ul
+                class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <a href="#first"
+                        class="nav-link block py-2 px-3 text-blue-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Booking
+                        Trend</a>
+                </li>
+                <li>
+                    <a href="#repeatedCustomer"
+                        class="nav-link block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Repeated
+                        Customers</a>
+                </li>
+                <li>
+                    <a href="#mostBookedServicesChart"
+                        class="nav-link block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Most
+                        Booked</a>
+                </li>
+            </ul>
+        </div>
+
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-            <div class="flex justify-center items-center">
-                <label for="trendPeriod" class="mr-2">Select Period:</label>
-                <select id="trendPeriod" class="border rounded p-2">
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="seasonal">Seasonal</option>
-                </select>
+            <div class="scale grid grid-cols-1 gap-4 mb-4">
+                <!-- Container for both dropdown and chart -->
+                <div class="w-full flex flex-col items-center gap-4 pt-2 rounded bg-gray-50 dark:bg-gray-800">
+
+                    <form class="max-w-sm mx-auto">
+                        <select id="trendPeriod"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Choose a period</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="seasonal">Seasonal</option>
+                        </select>
+                    </form>
+
+
+                    <!-- Appointment Chart (full width) -->
+                    <!-- <div class="flex items-center justify-center w-full h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800"> -->
+                    <canvas id="bookingTrendChart" class="w-full h-full"></canvas>
+                    <!-- </div> -->
+
+                </div>
             </div>
 
-            <div class="mt-5">
-                <canvas id="bookingTrendChart"></canvas>
+            <!-- Container with two columns -->
+            <div class=" scale grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                <!-- Appointment Chart (left side) -->
+                <div
+                    class="flex flex-col  items-center justify-center w-full h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                    <div class="flex justify-center mb-6">
+                        <h5 class="text-xl font-bold leading-none text-gray-700 dark:text-white">
+                            Repeated Customers
+                        </h5>
+                    </div>
+                    <div id="repeatedCustomer" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+
+                        <!-- Total Repeated Customers -->
+                        <a href="/bookings/repeatedUsers" class="block">
+                            <div
+                                class="flex flex-col items-center justify-center px-4 py-6 rounded bg-red-50 dark:bg-red-600">
+                                <p class="text-md font-semibold text-gray-600 dark:text-white flex items-center gap-2">
+                                    Total Repeated Customers
+                                </p>
+                                <span
+                                    class="inline-flex items-center justify-center w-16 h-16 mt-2 text-lg font-medium text-red-500 bg-red-100 rounded-full dark:bg-red-900 dark:text-red-300">
+                                    <%= totalRepeatCustomers %>
+                                </span>
+                            </div>
+                        </a>
+
+                        <!-- Repeated Customers Percentage -->
+                        <div>
+                            <div
+                                class="flex flex-col items-center justify-center px-4 py-6 rounded bg-blue-50 dark:bg-gray-600">
+                                <p class="text-md font-semibold text-gray-600 dark:text-white flex items-center gap-2">
+                                    Repeated Customers Percentage
+                                </p>
+                                <span
+                                    class="inline-flex items-center justify-center w-16 h-16 mt-2 text-lg font-medium text-blue-500 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+                                    <%= repeatCustomerPercentage.toFixed(2) %>%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Line Chart (right side) -->
+                <div class="flex items-center justify-center w-full h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+                    <canvas id="mostBookedServicesChart" class="w-full h-full"></canvas>
+                </div>
+
             </div>
         </div>
     </div>
+
+
     <script src="/javascripts/bookingTrend.js"></script>
+    <script src="/javascripts/customerPref.js"></script>
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>

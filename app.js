@@ -106,5 +106,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(5000, () => {
-    console.log("LISTENING ON PORT 3000");
+    console.log("LISTENING ON PORT 5000");
 })

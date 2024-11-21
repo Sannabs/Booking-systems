@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const labels = data.map((item) => item._id);
             const values = data.map((item) => item.totalBookings);
 
+            // If chart exists, destroy and recreate with new data
             if (bookingTrendChart) bookingTrendChart.destroy();
 
             bookingTrendChart = new Chart(chartContainer, {
@@ -32,9 +33,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 options: {
                     responsive: true,
                     scales: {
-                        x: { title: { display: true, text: "Timeframe" } },
+                        x: { 
+                            title: { display: true, text: "Timeframe" },
+                            ticks: { autoSkip: true, maxTicksLimit: 20 },
+                        },
                         y: { title: { display: true, text: "Bookings" } },
                     },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return `Bookings: ${tooltipItem.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: "nearest",
+                        axis: "x",
+                        intersect: false
+                    }
                 },
             });
         } catch (error) {

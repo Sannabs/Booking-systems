@@ -20,8 +20,10 @@ router.get(('/completed'), catchAsync(booking.completed))
 router.get(('/allBookings'), catchAsync(booking.allBookings))
 router.get(('/analytics'), catchAsync(booking.analytics))
 router.get('/trends', catchAsync(booking.getBookingTrends));
-
-
+router.get('/most-booked', catchAsync(booking.getMostBookedServices));
+router.get('/booking-summary', catchAsync(booking.getBookingSummaryData));
+router.get('/analytics/data', catchAsync(booking.getBookingAnalyticsData));
+router.get('/repeatedUsers', catchAsync(booking.repeatedUsers))
 
 router.get('/book', booking.bookForm)
 router.get('/allUsers', booking.showUsers)
