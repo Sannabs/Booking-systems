@@ -1,14 +1,13 @@
 const express = require('express');
 const catchAsync = require('../utils/catchAsync');
-const { storeReturnTo } = require('../middlewares/authMiddlewares');
+const { storeReturnTo, isLoggedIn, isAdmin } = require('../middlewares/authMiddlewares');
 const user = require('../controllers/authController')
 const passport = require('passport');
 const router = express.Router();
 
 
-// REGISTER OR SIGN UP 
 router.route('/register')
-    .get(user.renderRegister)
+    .get(isLoggedIn, isAdmin, (user.renderRegister))
     .post(catchAsync(user.register))
 
 

@@ -1,0 +1,6 @@
+ADDING PERMISSIONS TO THE USERS CUSTOMPERMISSION ARRAY, AVOIDING DUPLICATE($addToSet)
+    await User.findByIdAndUpdate(userId, { $addToSet: { customPermissions: permission } });
+
+
+REMOVING PERMISSIONS FROM THE CUSTOMPERMISSION
+await User.findByIdAndUpdate(userId, { $pull: { customPermissions: permission } });

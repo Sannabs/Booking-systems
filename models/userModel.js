@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { type } = require('os');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 
@@ -11,9 +12,18 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        enum: ["admin", "secretary", "generalManager", "headofMarket", "user"],
+        enum: ["admin", "user"],
         default: "user"
     },
+    position: {
+        type: String
+    },
+    customPermissions: { type: [String], default: [] },
+    avatar: {
+        type: String,
+        default: '/images/default-avatar.png', // Provide a default avatar image
+    }
+    
 },
     {
         timestamps: true,

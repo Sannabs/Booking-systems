@@ -85,15 +85,16 @@
                                 </a>
                             </li>
                             <% } %>
-                                <% if(!currentUser) { %>
-                                    <li>
-                                        <a href="/register"
-                                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                            <i class="ri-user-add-line"></i>
-                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-                                        </a>
-                                    </li>
-                                    <% } %>
+                            <% if(currentUser && currentUser.role==='admin' ) { %>
+
+                                <li>
+                                    <a href="/register"
+                                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <i class="ri-user-add-line"></i>
+                                        <span class="flex-1 ms-3 whitespace-nowrap">Invite User</span>
+                                    </a>
+                                </li>
+                                <% } %>
             </ul>
         </div>
     </aside>
@@ -111,7 +112,7 @@
                         </p>
                         <span
                             class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-orange-500 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
-                            <%=totalPending  %>
+                            <%=totalPending %>
                         </span>
                     </div>
                 </a>
@@ -124,7 +125,7 @@
                         </p>
                         <span
                             class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
-                            <%=totalApproved  %>
+                            <%=totalApproved %>
                         </span>
                     </div>
                 </a>
@@ -154,7 +155,7 @@
                         </p>
                         <span
                             class="inline-flex items-center justify-center w-8 h-8 mt-2 text-sm font-medium text-gray-400 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-200">
-                            <%=totalbookings  %>
+                            <%=totalbookings %>
                         </span>
                     </div>
                 </a>

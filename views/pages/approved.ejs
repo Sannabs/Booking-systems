@@ -1,5 +1,7 @@
 <%- layout('layouts/boiler') %>
 
+
+
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
         type="button"
         class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -93,15 +95,15 @@
                                 </a>
                             </li>
                             <% } %>
-                                <% if(!currentUser) { %>
-                                    <li>
-                                        <a href="/register"
-                                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                            <i class="ri-user-add-line"></i>
-                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-                                        </a>
-                                    </li>
-                                    <% } %>
+                            <% if(currentUser.role === 'admin') { %>
+                                <li>
+                                    <a href="/register"
+                                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <i class="ri-user-add-line"></i>
+                                        <span class="flex-1 ms-3 whitespace-nowrap">Invite User</span>
+                                    </a>
+                                </li>
+                                <% } %>
             </ul>
         </div>
     </aside>
@@ -130,27 +132,27 @@
                         </tr>
                     </thead>
                     <% for (let booking of bookings) {%>
-                    <tbody>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <%= booking.company %>
-                            </th>
-                            <td class="px-6 py-4">
-                                <%= booking.service  %>
-                            </td>
-                            <td class="px-6 py-4">
-                                <%= booking.appointmentType %>
-                            </td>
-                            <td class="px-6 py-4">
-                                <%= booking.fullname  %>
-                            </td>
-                            <td class="px-6 py-4 text-right">                            
-                            </td>    
-                        </tr>
-                    </tbody>
-                    <% } %>
+                        <tbody>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <%= booking.company %>
+                                </th>
+                                <td class="px-6 py-4">
+                                    <%= booking.service %>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <%= booking.appointmentType %>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <%= booking.fullname %>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                </td>
+                            </tr>
+                        </tbody>
+                        <% } %>
                 </table>
             </div>
 

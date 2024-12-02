@@ -1,4 +1,4 @@
-const  ExpressError =require('../utils/ExpressError')
+const ExpressError = require('../utils/ExpressError')
 const Booking = require("../models/Booking")
 
 module.exports.storeReturnTo = (req, res, next) => {
@@ -30,25 +30,19 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-// function isAdmin(req, res, next) {
-//     if (req.isAuthenticated() && req.user && req.user.role === 'admin') {
-//         return next();
-//     }
-//     req.flash('error', 'You do not have permission to perform this action.');
-//     res.redirect('/dashboard');
-// }
-  
+module.exports.isAdmin = (req, res, next) => {
+    if (req.isAuthenticated() && req.user && req.user.role === 'admin') {
+        return next();
+    }
+    req.flash('error', 'You do not have permission for that.');
+    res.redirect('/bookings');
+}
 
 
-
-// // REVIEW SERVER SIDE VALIDATOIN WITH JOI
-// module.exports.validateReview = (req, res, next) => {
-//     const { error } = reviewSchema.validate(req.body)
-//     if (error) {
-//         const msg = error.details.map(el => el.message).join(',')
-//         throw new ExpressError(msg, 400)
-//     } else {
-//         next()
-//     }
-
-// }
+module.exports.isAllowed = (req, res, next) => {
+    if(req.isAuthenticated() && req.user && (req.user.role === 'admin' || req.user.role === 'generalManager')) {
+        return next()
+    }
+    req.flash('error', 'You are not authorized to do that.')
+    res.redirect('/bookings')
+}

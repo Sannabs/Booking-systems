@@ -22,6 +22,9 @@ const app = express()
 const ExpressError = require('./utils/ExpressError');
 const BookingRoutes = require('./routes/Booking');
 const authRoutes = require("./routes/authRoutes")
+const logRoutes = require('./routes/Logs')
+const ipExtractor = require('./middlewares/ipExtractor');
+
 
 
 
@@ -38,7 +41,7 @@ app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'src')))
@@ -63,13 +66,24 @@ const sessionConfig = {
 
 app.use(session(sessionConfig))
 app.use(flash())
+app.use(ipExtractor);
+
 
 
 app.use(passport.initialize())
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()))
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser())
+// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await User.findById(id).select('username email role customPermissions');
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+});
 
 
 app.use((req, res, next) => {
@@ -85,6 +99,7 @@ app.use(storeReturnTo)  //REMOVE ME
 // routes
 app.use('/bookings', BookingRoutes)
 app.use('/', authRoutes)
+app.use ('/api', logRoutes)
 
 
 

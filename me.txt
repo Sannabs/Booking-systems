@@ -1,0 +1,187 @@
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchDesktop = document.getElementById('searchBook');
+    const suggestionsDesktop = document.getElementById('suggestions');
+
+    function performSearch(query, suggestionsElement) {
+        if (query.length > 0) {
+            fetch(`/bookings/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length) {
+                        let suggestionsHtml = data.map(booking => 
+                            `<a href="/bookings/allBookings/${booking._id}" class="block w-full px-3 py-2 rounded-md transition-colors duration-200 hover:bg-blue-100">
+                                ${booking.company} - ${booking.service}
+                            </a>`
+                        ).join('');
+                        suggestionsElement.innerHTML = suggestionsHtml;
+                        suggestionsElement.classList.remove('hidden');
+                    } else {
+                        suggestionsElement.innerHTML = `
+                            <div class="block p-2">No results found</div>
+                        `;
+                        suggestionsElement.classList.remove('hidden');
+                    }
+                })
+                .catch(error => console.error('Error fetching search results:', error));
+        } else {
+            suggestionsElement.classList.add('hidden');
+        }
+    }
+
+    if (searchDesktop) {
+        searchDesktop.addEventListener('input', function() {
+            performSearch(searchDesktop.value, suggestionsDesktop);
+        });
+    }
+});
+
+
+
+CONTROLLER
+module.exports.search = async (req, res) => {
+    const query = req.query.q;
+    if (!query) {
+        return res.json([]);
+    }
+    try {
+        const bookings = await Booking.find({
+            $or: [
+                { company: { $regex: query, $options: 'i' } },
+                { service: { $regex: query, $options: 'i' } }
+            ]
+        }).select('_id company service').limit(10);
+        res.json(bookings);
+    } catch (e) {
+        res.status(500).send('SERVER ERROR');
+        console.error(e)
+    }
+}
+
+
+ROUTE
+router.get('/search', catchAsync(booking.search))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const User = require('../models/userModel')
+const axios = require('axios')
+const UAParser = require('ua-parser-js');
+const Log = require('../models/Logs')
+
+
+module.exports.renderRegister = (req, res) => {
+    res.render('auths/register')
+}
+
+module.exports.register = async (req, res, next) => {
+    try {
+        const { email, username, password, position, role = "user" } = req.body;
+
+        const user = new User({ email, username, position, role });
+        const registeredUser = await User.register(user, password);
+
+        req.flash('success', `User ${username} has been successfully created by admin.`);
+        res.redirect('/bookings/allUsers'); 
+    } catch (e) {
+        req.flash('error', e.message);
+        res.redirect('/register');
+    }
+};
+
+
+module.exports.renderLogin = (req, res) => {
+    res.render('auths/login')
+}
+
+// module.exports.login = (req, res) => {
+//     req.flash('success', `Welcome back ${req.user.username}!`);
+//     const redirectUrl = res.locals.returnTo || '/bookings';
+//     delete req.session.returnTo;
+//     res.redirect(redirectUrl);
+// }
+
+async function fetchIpInfo(ip) {
+    try {
+        const response = await axios.get(`https://ipinfo.io/${ip}?token=${process.env.IPINFO_TOKEN}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching IP info:', error.message);
+        return {};
+    }
+}
+
+module.exports.login = async (req, res) => {
+    try {
+        // Extract user and IP info
+        const user = req.user; // Passport sets this on successful login
+        const ip = req.clientIp;
+        const userAgent = req.headers['user-agent'];
+
+        // Fetch location data
+        const ipInfo = await fetchIpInfo(ip);
+        const [latitude, longitude] = ipInfo.loc ? ipInfo.loc.split(',') : [null, null];
+
+        // Parse user-agent
+        const parser = new UAParser(userAgent);
+        const deviceInfo = parser.getResult();
+
+        // Create audit log
+        const log = new Log({
+            userId: user._id,
+            ipAddress: ip,
+            deviceName: deviceInfo.device.model || 'Unknown Device',
+            browser: deviceInfo.browser.name || 'Unknown Browser',
+            location: {
+                city: ipInfo.city,
+                country: ipInfo.country,
+                coordinates: {
+                    latitude: latitude ? parseFloat(latitude) : null,
+                    longitude: longitude ? parseFloat(longitude) : null,
+                },
+            },
+        });
+
+        await log.save();
+
+        // Flash message and redirect
+        req.flash('success', `Welcome back ${user.username}!`);
+        const redirectUrl = res.locals.returnTo || '/bookings';
+        delete req.session.returnTo;
+        res.redirect(redirectUrl);
+    } catch (error) {
+        console.error('Error logging in:', error.message);
+        req.flash('error', 'An error occurred during login.');
+        res.redirect('/auths/login');
+    }
+};
+
+
+module.exports.logout = (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        req.flash('success', 'GoodBye!')
+        res.redirect('/bookings')
+    })
+}

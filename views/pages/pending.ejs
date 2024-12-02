@@ -93,12 +93,12 @@
                                 </a>
                             </li>
                             <% } %>
-                                <% if(!currentUser) { %>
+                            <% if(currentUser && currentUser.role==='admin' ) { %>
                                     <li>
                                         <a href="/register"
                                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                             <i class="ri-user-add-line"></i>
-                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+                                            <span class="flex-1 ms-3 whitespace-nowrap">Invite User</span>
                                         </a>
                                     </li>
                                     <% } %>

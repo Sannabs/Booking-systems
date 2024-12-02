@@ -3,6 +3,50 @@ const Booking = require('../models/Booking')
 const User = require('../models/userModel')
 
 
+// RBAC(ROLE BASE ACCESS CONTROL)
+module.exports.getUserPermissions = async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+    return res.status(200).json({ permissions: user.customPermissions || [] });
+};
+
+module.exports.assignPermissions = async (req, res) => {
+    const { id } = req.params;
+    const { permissions } = req.body;
+
+    const user = await User.findById(id);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+    const currentPermissions = user.customPermissions || [];
+
+    const permissionsToAdd = permissions.filter(permission => !currentPermissions.includes(permission));
+    if (permissionsToAdd.length > 0) {
+        await User.findByIdAndUpdate(id, {
+            $addToSet: { customPermissions: { $each: permissionsToAdd } }
+        });
+    }
+    const permissionsToRemove = currentPermissions.filter(permission => !permissions.includes(permission));
+    if (permissionsToRemove.length > 0) {
+        await User.findByIdAndUpdate(id, {
+            $pull: { customPermissions: { $in: permissionsToRemove } }
+        });
+    }
+    return res.status(200).json({ message: 'Permissions updated successfully!' });
+};
+
+
+
+module.exports.edit = async (req, res) => {
+    const users = User.find({})
+    res.render('pages/edit')
+}
+
+
+// OTHER CONTROLLERS 
 
 module.exports.index = async (req, res) => {
     const bookings = await Booking.find({})
@@ -12,8 +56,51 @@ module.exports.index = async (req, res) => {
     res.render('pages/index', { bookings, totalApproved, totalPending, totalbookings })
 }
 
+module.exports.search = async (req, res) => {
+    const query = req.query.q;
+    if (!query) {
+        return res.json([]);
+    }
+    try {
+        const bookings = await Booking.find({
+            $or: [
+                { company: { $regex: query, $options: 'i' } },
+                { service: { $regex: query, $options: 'i' } }
+            ]
+        }).select('_id company service').limit(10);
+        res.json(bookings);
+    } catch (e) {
+        res.status(500).send('SERVER ERROR');
+        console.error(e)
+    }
+}
+
+module.exports.searchUser = async (req, res) => {
+    const query = req.query.q;
+    if (!query) {
+        return res.json([]);
+    }
+    try {
+        const bookings = await User.find({
+            $or: [
+                { username: { $regex: query, $options: 'i' } },
+                { email: { $regex: query, $options: 'i' } }
+            ]
+        }).select('_id username email').limit(10);
+        res.json(bookings);
+    } catch (e) {
+        res.status(500).send('SERVER ERROR');
+        console.error(e)
+    }
+}
+
+
 module.exports.analytics = async(req, res) => {
     res.render('pages/analytics')
+}
+
+module.exports.userDetails = async(req, res) => {
+    res.render('pages/userDetails')
 }
 
 module.exports.approved = async (req, res) => {

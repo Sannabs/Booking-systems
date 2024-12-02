@@ -1,5 +1,4 @@
 <%- layout('layouts/boiler') %>
-
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
         type="button"
         class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -102,83 +101,105 @@
                                         </a>
                                     </li>
                                     <% } %>
+                                        <% if(currentUser && currentUser.role==='admin' ) { %>
+                                            <li>
+                                                <a href="/api/logs"
+                                                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                    <i class="fas fa-history"></i>
+                                                    <span class="flex-1 ms-3 whitespace-nowrap">Audit Logs</span>
+                                                </a>
+                                            </li>
+                                            <% } %>
+
             </ul>
         </div>
     </aside>
 
     <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-            <!-- Search Bar -->
-            <div class="flex justify-center items-center pb-4 bg-white dark:bg-gray-900">
-                <label for="table-search-users" class="sr-only">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-
-                    <input type="search" name="q" id="searchBook"
-                        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search for bookings">
-                    <div id="suggestions"
-                        class="suggest absolute bg-white border border-gray-300 mt-1 w-full hidden rounded-md z-10">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Table -->
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-2xl font-bold mb-6">Audit Logs</h1>
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full border-collapse border border-gray-300">
+                    <thead class="bg-gray-100">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Product name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Color
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Category
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Price
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Edit</span>
-                            </th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">IP Address</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Device Name</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Browser</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Device Type</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">OS</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">CPU Architecture</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Login Time</th>
                         </tr>
                     </thead>
-                    <% for(let booking of bookings){%>
-                        <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer"
-                                onclick="window.location.href='/bookings/pending/<%= booking._id %>'">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <%= booking.company %>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <%= booking.service %>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%= booking.appointmentType %>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%= booking.fullname %>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                </td>
+                    <tbody>
+                        <% if (logs.length> 0) { %>
+                            <% logs.forEach(log=> { %>
+                                <tr class="hover:bg-gray-50">
+                                    <!-- User -->
+                                    <td class="border border-gray-300 px-4 py-2 flex items-center space-x-3">
+                                        <img src="<%= log.userId.avatar || '/images/default-avatar.png' %>"
+                                            alt="<%= log.userId.username || 'User Avatar' %>"
+                                            class="w-8 h-8 rounded-full">
+                                        <span>
+                                            <%= log.userId ? log.userId.username : 'Unknown User' %>
+                                        </span>
+                                    </td>
 
-                            </tr>
-                        </tbody>
+                                    <!-- IP Address -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.ipAddress %>
+                                    </td>
 
-                        <% } %>
+                                    <!-- Device Name -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.deviceName %>
+                                    </td>
+
+                                    <!-- Browser -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.browser.name %> (v<%= log.browser.version %>)
+                                    </td>
+
+                                    <!-- Device Type -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.device.type %> (<%= log.device.model %>)
+                                    </td>
+
+                                    <!-- OS -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.os.name %> (v<%= log.os.version %>)
+                                    </td>
+
+                                    <!-- CPU Architecture -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.cpu.architecture %>
+                                    </td>
+
+                                    <!-- Location -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= log.location.city || 'N/A' %>, <%= log.location.country || 'N/A' %>
+                                                <br>
+                                                Lat: <%= log.location.coordinates.latitude || 'N/A' %>,
+                                                    Lon: <%= log.location.coordinates.longitude || 'N/A' %>
+                                    </td>
+
+                                    <!-- Login Time -->
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <%= new Date(log.loginTime).toLocaleString() %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="9" class="border border-gray-300 px-4 py-2 text-center">No logs
+                                                found</td>
+                                        </tr>
+                                        <% } %>
+                    </tbody>
                 </table>
             </div>
-
         </div>
+
     </div>
-    <script src="/javascripts/search.js"></script>

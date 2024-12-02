@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Booking = require('../models/Booking');  // Adjust the path if necessary
+const Booking = require('../models/Booking');  
 
 const seedBookings = async () => {
     try {

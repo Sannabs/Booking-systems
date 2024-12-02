@@ -1,4 +1,10 @@
 <%- layout('layouts/boiler') %>
+    <style>
+        .pen:hover {
+            color: rgb(29, 29, 94) !important;
+            text-decoration: underline !important;
+        }
+    </style>
 
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
         type="button"
@@ -86,12 +92,12 @@
                                 </a>
                             </li>
                             <% } %>
-                                <% if(!currentUser) { %>
+                            <% if(currentUser && currentUser.role==='admin' ) { %>
                                     <li>
                                         <a href="/register"
                                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                             <i class="ri-user-add-line"></i>
-                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+                                            <span class="flex-1 ms-3 whitespace-nowrap">Invite User</span>
                                         </a>
                                     </li>
                                     <% } %>
@@ -116,27 +122,23 @@
                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-                        <input type="text" id="table-search-users"
+                        <input type="search" name="q" id="searchUser"
                             class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Search for users">
+                        <div id="suggestions"
+                            class="suggest suggestion-box absolute bg-white border border-gray-300 mt-1 w-full hidden rounded-md z-10">
+                        </div>
+
                     </div>
                 </div>
-
+                <!-- Table of users -->
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Position
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Status
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
+                            <th scope="col" class="px-6 py-3">Name</th>
+                            <th scope="col" class="px-6 py-3">Position</th>
+                            <th scope="col" class="px-6 py-3">Status</th>
+                            <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,12 +168,146 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
-                                        user</a>
+                                    <button class="text-blue-600 ml-3 font-medium"
+                                        onclick="openAssignPrivilegesModal('<%= user._id %>', '<%= user.username %>')"> <i class="fas fa-pen"></i>
+                                        Assign Privileges
+                                    </button>
                                 </td>
                             </tr>
                             <% } %>
                     </tbody>
                 </table>
+
+                <!-- Side Menu for Assigning Privileges -->
+                <div id="assignPrivilegesModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+                    <div class="flex justify-end p-4">
+                        <button onclick="closeAssignPrivilegesModal()" class="text-white">Close</button>
+                    </div>
+                    <div class="flex justify-center items-center min-h-screen">
+                        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                            <h2 class="text-lg font-bold mb-4">Assign Privileges to <span id="userName"></span></h2>
+                            <form id="assignPrivilegesForm">
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canApproveBooking" id="canApproveBooking"> Can Approve Bookings
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canUnApproveBooking" id="canUnApproveBooking"> Can DisApprove Bookings
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canViewAnalytics" id="canViewAnalytics"> Can View Analytics
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canViewDetails" id="canViewDetails"> Can View Booking Details
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canSeeAllBookings" id="canSeeAllBookings"> Can See All Bookings
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canSeeUserDetails" id="canSeeUserDetails"> Can See User Details
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canSeeAllUsers" id="canSeeAllUsers"> Can See All Users
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canSeePendings" id="canSeePendings"> Can See All Pending Bookings
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canSeeApproved" id="canSeeApproved"> Can See All Approved Bookings
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="permissions" value="canSeeCompleted" id="canSeeCompleted"> Can See All Completed Meetings
+                                    </label>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Save Permissions</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
             </div </div>
         </div>
+
+        <script src="/javascripts/searchUser.js"></script>
+
+
+        <script>
+async function openAssignPrivilegesModal(userId, userName) {
+    document.getElementById('userName').innerText = userName;
+    document.getElementById('assignPrivilegesModal').classList.remove('hidden');
+    document.getElementById('assignPrivilegesForm').setAttribute('data-user-id', userId);
+
+    try {
+        const response = await fetch(`/bookings/user/${userId}/permissions`);
+        const data = await response.json();
+
+        if (response.ok) {
+            const userPermissions = data.permissions || [];
+            Array.from(document.getElementsByName('permissions')).forEach(checkbox => {
+                checkbox.checked = userPermissions.includes(checkbox.value);
+            });
+        } else {
+            alert('Failed to fetch user permissions');
+        }
+    } catch (error) {
+        console.error('Error fetching permissions:', error);
+        alert('An error occurred while fetching user permissions');
+    }
+}
+
+function closeAssignPrivilegesModal() {
+    document.getElementById('assignPrivilegesModal').classList.add('hidden');
+}
+
+document.getElementById('assignPrivilegesForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const userId = this.getAttribute('data-user-id');
+    const selectedPermissions = Array.from(this.elements['permissions'])
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+
+    try {
+        const response = await fetch(`/bookings/user/${userId}/access`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ permissions: selectedPermissions })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert(data.message);
+            closeAssignPrivilegesModal();
+        } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.error}`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while assigning permissions');
+    }
+});
+
+        </script>

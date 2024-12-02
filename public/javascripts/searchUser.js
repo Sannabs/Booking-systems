@@ -1,17 +1,17 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    const searchDesktop = document.getElementById('searchBook');
+    const searchDesktop = document.getElementById('searchUser');
     const suggestionsDesktop = document.getElementById('suggestions');
 
     function performSearch(query, suggestionsElement) {
         if (query.length > 0) {
-            fetch(`/bookings/search?q=${query}`)
+            fetch(`/bookings/users/searchUser?q=${query}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.length) {
-                        let suggestionsHtml = data.map(booking => 
-                            `<a href="/bookings/details/${booking._id}" class="block w-full px-3 py-2 rounded-md transition-colors duration-200 hover:bg-blue-100">
-                                ${booking.company} - ${booking.service}
+                        let suggestionsHtml = data.map(user => 
+                            `<a href="/bookings/userDetails/${user._id}" class="block w-full px-3 py-2 rounded-md transition-colors duration-200 hover:bg-blue-100">
+                                ${user.username} - ${user.email}
                             </a>`
                         ).join('');
                         suggestionsElement.innerHTML = suggestionsHtml;
