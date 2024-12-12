@@ -137,8 +137,11 @@
                             <td class="px-6 py-4">
                                 <%= booking.fullname  %>
                             </td>
-                            <td class="px-6 py-4 text-right">                            
-                            </td>    
+                            <% if(booking.appointmentType ===  "Virtual"){ %>
+                            <td style="white-space: nowrap;" class="px-6 py-4 underline text-right font-medium text-blue-500"> 
+                                <a href="/meetings/create">Schedule Meeting</a>                           
+                            </td> 
+                            <% } %>   
                         </tr>
                     </tbody>
                     <% } %>

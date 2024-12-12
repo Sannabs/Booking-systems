@@ -1,0 +1,17 @@
+<%- layout('layouts/boiler') %>
+
+<form action="/meetings/create" method="POST">
+    <label for="topic">Topic:</label>
+    <input type="text" id="topic" name="topic" required />
+
+    <label for="start_time">Start Time:</label>
+    <input type="datetime-local" id="start_time" name="start_time" required />
+
+    <label for="duration">Duration (minutes):</label>
+    <input type="number" id="duration" name="duration" required />
+
+    <!-- Add this field if userId is available in the session -->
+    <input type="hidden" name="userId" value="<%= userId %>" />
+
+    <button type="submit">Schedule Meeting</button>
+</form>

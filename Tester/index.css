@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .left-column {
+    width: 25%;
+    background: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left-column ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .left-column li {
+    margin: 15px 0;
+  }
+  
+  .left-column a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .right-column {
+    width: 75%;
+    padding: 20px;
+  }
+  

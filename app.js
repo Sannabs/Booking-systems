@@ -22,8 +22,7 @@ const app = express()
 const ExpressError = require('./utils/ExpressError');
 const BookingRoutes = require('./routes/Booking');
 const authRoutes = require("./routes/authRoutes")
-
-
+// const MeetingRoutes = require('./routes/Meeting')
 
 mongoose.connect('mongodb://127.0.0.1:27017/Coder')
 const db = mongoose.connection;
@@ -84,6 +83,7 @@ app.use(storeReturnTo)  //REMOVE ME
 
 // routes
 app.use('/bookings', BookingRoutes)
+// app.use('/meetings', MeetingRoutes)
 app.use('/', authRoutes)
 
 
