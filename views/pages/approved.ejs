@@ -47,15 +47,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="ri-notification-3-line"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Notifications</span>
-                        <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-                    </a>
-                </li>
-                <li>
                     <a href="/bookings/allUsers"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <i class="ri-group-line"></i>
@@ -132,6 +123,7 @@
                         </tr>
                     </thead>
                     <% for (let booking of bookings) {%>
+<<<<<<< HEAD
                         <tbody>
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -153,6 +145,32 @@
                             </tr>
                         </tbody>
                         <% } %>
+=======
+                    <tbody>
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <%= booking.company %>
+                            </th>
+                            <td class="px-6 py-4">
+                                <%= booking.service  %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= booking.appointmentType %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= booking.fullname  %>
+                            </td>
+                            <% if(booking.appointmentType ===  "Virtual"){ %>
+                            <td style="white-space: nowrap;" class="px-6 py-4 underline text-right font-medium text-blue-500"> 
+                                <a href="/meetings/create">Schedule Meeting</a>                           
+                            </td> 
+                            <% } %>   
+                        </tr>
+                    </tbody>
+                    <% } %>
+>>>>>>> a5d9b36931f307835e69f7853f69e2be3dfa5ff6
                 </table>
             </div>
 

@@ -82,7 +82,7 @@ const BookingSchema = new mongoose.Schema({
     unApproved: {
         type: Boolean,
         default: false
-    }
+    },
 },
     {
         timestamps: true,

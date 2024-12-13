@@ -1,0 +1,11 @@
+<%- layout('layouts/boiler') %>
+<h1>Scheduled Meetings</h1>
+<ul>
+    <% meetings.forEach(meeting => { %>
+        <li>
+            <strong><%= meeting.topic %></strong> 
+            (<%= new Date(meeting.startTime).toLocaleString() %>)<br />
+            Join URL: <a href="<%= meeting.joinUrl %>"><%= meeting.joinUrl %></a>
+        </li>
+    <% }); %>
+</ul>

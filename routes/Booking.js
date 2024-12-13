@@ -20,9 +20,25 @@ router.route('/')
 router.route('/user/:id/access')
     .post(isLoggedIn, isAdmin, catchAsync(booking.assignPermissions));
 
+<<<<<<< HEAD
 router.route('/user/:id/permissions')
     .get(isLoggedIn, isAdmin, catchAsync(booking.getUserPermissions));
 // router.get('/user/:id/edit', booking.edit)
+=======
+router.get(('/pending'),catchAsync(booking.getPendingBookings))
+router.get(('/approved'), catchAsync(booking.approved))
+router.get(('/completed'), catchAsync(booking.completed))
+router.get(('/allBookings'), catchAsync(booking.allBookings))
+router.get(('/analytics'), catchAsync(booking.analytics))
+router.get('/trends', catchAsync(booking.getBookingTrends));
+router.get('/most-booked', catchAsync(booking.getMostBookedServices));
+router.get('/booking-summary', catchAsync(booking.getBookingSummaryData));
+router.get('/analytics/data', catchAsync(booking.getBookingAnalyticsData));
+router.get('/repeatedUsers', catchAsync(booking.repeatedUsers))
+
+router.get('/book', booking.bookForm)
+router.get('/allUsers', booking.showUsers)
+>>>>>>> a5d9b36931f307835e69f7853f69e2be3dfa5ff6
 
 
 router.get('/pending', checkPermission('canSeePendings'), catchAsync(booking.getPendingBookings));

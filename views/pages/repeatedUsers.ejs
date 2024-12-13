@@ -29,14 +29,6 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
                     </a>
                 </li>
-
-                <li>
-                    <a href="/bookings/analytics"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <i class="ri-line-chart-line"></i>
-                        <span class="ms-3">Analytics</span>
-                    </a>
-                </li>
                 <li>
                     <a href="#"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -84,92 +76,78 @@
                                 </a>
                             </li>
                             <% } %>
-                                <% if(currentUser && currentUser.role==='admin' ) { %>
+                                <% if(!currentUser) { %>
                                     <li>
                                         <a href="/register"
                                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                             <i class="ri-user-add-line"></i>
-                                            <span class="flex-1 ms-3 whitespace-nowrap">Invite User</span>
+                                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
                                         </a>
                                     </li>
                                     <% } %>
             </ul>
         </div>
     </aside>
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
 
-    <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-
-            <!-- Search Bar -->
-            <div class="flex justify-center items-center pb-4 bg-white dark:bg-gray-900">
-                <label for="table-search-users" class="sr-only">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-
-                    <input type="search" name="q" id="searchBook"
-                        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search for bookings">
-                    <div id="suggestions"
-                        class="suggest absolute bg-white border border-gray-300 mt-1 w-full hidden rounded-md z-10">
-                    </div>
+        <!-- Search Bar -->
+        <div class="flex justify-center items-center pb-4 bg-white dark:bg-gray-900">
+            <label for="table-search-users" class="sr-only">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
                 </div>
+                <input type="text" id="table-search-users"
+                    class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Search for users">
             </div>
-
-            <!-- Table -->
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Product name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Color
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Category
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Price
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Edit</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <% for(let booking of bookings){%>
-                        <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer"
-                                onclick="window.location.href='/bookings/pending/<%= booking._id %>'">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <%= booking.company %>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <%= booking.service %>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%= booking.appointmentType %>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%= booking.fullname %>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                </td>
-
-                            </tr>
-                        </tbody>
-
-                        <% } %>
-                </table>
-            </div>
-
         </div>
+
+        <!-- Table -->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Company
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-6 py-3" style="white-space: nowrap;">
+                            Total Book
+                        </th>                             
+                        <th scope="col" class="px-6 py-3">
+                            Email
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop over repeatedUsers instead of bookings -->
+                    <% for(let user of repeatedUsers){ %>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <%= user.company %>
+                            </th>
+                            <td class="px-6 py-4" style="white-space: nowrap;">
+                                <%= user.fullname %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= user.totalBookings %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= user._id %> <!-- Assuming _id is the email -->
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
     </div>
-    <script src="/javascripts/search.js"></script>
+</div>

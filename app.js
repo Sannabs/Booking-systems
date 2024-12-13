@@ -22,11 +22,15 @@ const app = express()
 const ExpressError = require('./utils/ExpressError');
 const BookingRoutes = require('./routes/Booking');
 const authRoutes = require("./routes/authRoutes")
+<<<<<<< HEAD
 const logRoutes = require('./routes/Logs')
 const ipExtractor = require('./middlewares/ipExtractor');
 
 
 
+=======
+// const MeetingRoutes = require('./routes/Meeting')
+>>>>>>> a5d9b36931f307835e69f7853f69e2be3dfa5ff6
 
 mongoose.connect('mongodb://127.0.0.1:27017/Coder')
 const db = mongoose.connection;
@@ -98,6 +102,7 @@ app.use(storeReturnTo)  //REMOVE ME
 
 // routes
 app.use('/bookings', BookingRoutes)
+// app.use('/meetings', MeetingRoutes)
 app.use('/', authRoutes)
 app.use ('/api', logRoutes)
 
@@ -121,5 +126,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(5000, () => {
-    console.log("LISTENING ON PORT 3000");
+    console.log("LISTENING ON PORT 5000");
 })
