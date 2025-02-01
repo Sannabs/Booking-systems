@@ -58,50 +58,6 @@ module.exports.index = async (req, res) => {
     res.render('pages/index', { bookings, totalApproved, totalPending, totalbookings })
 }
 
-<<<<<<< HEAD
-module.exports.search = async (req, res) => {
-    const query = req.query.q;
-    if (!query) {
-        return res.json([]);
-    }
-    try {
-        const bookings = await Booking.find({
-            $or: [
-                { company: { $regex: query, $options: 'i' } },
-                { service: { $regex: query, $options: 'i' } }
-            ]
-        }).select('_id company service').limit(10);
-        res.json(bookings);
-    } catch (e) {
-        res.status(500).send('SERVER ERROR');
-        console.error(e)
-    }
-}
-
-module.exports.searchUser = async (req, res) => {
-    const query = req.query.q;
-    if (!query) {
-        return res.json([]);
-    }
-    try {
-        const bookings = await User.find({
-            $or: [
-                { username: { $regex: query, $options: 'i' } },
-                { email: { $regex: query, $options: 'i' } }
-            ]
-        }).select('_id username email').limit(10);
-        res.json(bookings);
-    } catch (e) {
-        res.status(500).send('SERVER ERROR');
-        console.error(e)
-    }
-}
-
-
-module.exports.analytics = async(req, res) => {
-    res.render('pages/analytics')
-}
-=======
 
 module.exports.analytics = async (req, res) => {
     // Total number of bookings
@@ -158,7 +114,6 @@ module.exports.getMostBookedServices = async (req, res) => {
 };
 
 
->>>>>>> a5d9b36931f307835e69f7853f69e2be3dfa5ff6
 
 module.exports.userDetails = async(req, res) => {
     res.render('pages/userDetails')
